@@ -20,7 +20,8 @@
     ];
 
     function wages(float $basePay, float $hoursWorked): string {
-        if($basePay < 8){
+        $basePay *= 100;
+        if($basePay < 800){
             return "The State requires at least minimum wage of $8.00 per hour\n";
         } else if($hoursWorked > 60){
             return "The company doesn't allow employees work more than 60 hours a week\n";
@@ -28,9 +29,9 @@
         if($hoursWorked > 40){
             $overtime = $hoursWorked - 40;
             $regularHours = $hoursWorked - $overtime;
-            $wages = number_format($basePay * $regularHours + $overtime * $basePay * 1.5, 2);
+            $wages = $basePay/100 * $regularHours + $overtime * $basePay * 1.5;
         } else {
-            $wages = number_format($basePay * $hoursWorked, 2);
+            $wages = $basePay/100 * $hoursWorked;
         }
         return "Your total pay is {$wages}$\n";
     }
